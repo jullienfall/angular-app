@@ -10,14 +10,10 @@ import { Data } from './data';
 export class BlogComponent implements OnInit {
 
   data: Data[];
-  firstData: Data[];
   constructor(private blogService: BlogService) {}
 
   ngOnInit():void {
-    this.blogService.getData().subscribe(res => {
-      this.data = res;
-      this.firstData = this.data.slice(0, 5);
-    });
+    this.blogService.getData().subscribe(res => this.data = res);
   }
 
 

@@ -1,7 +1,8 @@
 <div class="container">
-    <div *ngFor='let item of firstData'>
+    <div *ngFor='let item of data | paginate: { itemsPerPage: 5, currentPage: p }'>
         <h2><span>{{ item.id }}. </span>{{ item.name }}</h2>
         <p>{{ item.body }}</p>
     </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 
