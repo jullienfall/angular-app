@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogService } from './blog.service'; 
+import { Data } from './data'; 
 
 @Component({
   selector: 'app-blog',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
 
-  constructor() { }
+  data: Data[];
+  firstData: Data[];
+  constructor(private blogService: BlogService) {}
 
-  ngOnInit() {
+  ngOnInit():void {
+    this.blogService.getData().subscribe(res => {
+      this.data = res;
+      this.firstData = this.data.slice(0, 5);
+    });
   }
+
 
 }

@@ -1,2 +1,7 @@
-<div class="container">Blog</div>
+<div class="container">
+    <div *ngFor='let item of firstData'>
+        <h2><span>{{ item.id }}. </span>{{ item.name }}</h2>
+        <p>{{ item.body }}</p>
+    </div>
+</div>
 
