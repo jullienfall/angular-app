@@ -1,7 +1,1 @@
-body {
-    margin: 0;
-}
-
-.container {
-    padding: 3rem;
-}
+@import "~bootstrap/dist/css/bootstrap.min.css";
