@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService } from './blog.service'; 
-import { Data } from './data'; 
+import { BlogService } from './blog.service';
+import { Data } from './data';
 
 @Component({
   selector: 'app-blog',
@@ -10,9 +10,9 @@ import { Data } from './data';
 export class BlogComponent implements OnInit {
 
   data: Data[];
-  constructor(private blogService: BlogService) {}
+  constructor(private blogService: BlogService) { }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.blogService.getData().subscribe(res => this.data = res);
   }
 

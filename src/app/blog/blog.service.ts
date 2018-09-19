@@ -12,7 +12,7 @@ export class BlogService {
 
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<Data[]>{
+  getData(): Observable<Data[]> {
     return this.http.get<Data[]>(this.url);
   }
 }

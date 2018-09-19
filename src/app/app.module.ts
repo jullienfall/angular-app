@@ -19,7 +19,7 @@ import { BlogModule } from './blog/blog.module';
     BrowserModule,
     AppRoutingModule,
     BlogModule,
-    FormsModule    
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

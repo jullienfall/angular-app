@@ -11,8 +11,8 @@ import { Customer } from './customer';
 export class ContactComponent {
 
   customer: Customer = new Customer();
-  
-  save(customerForm: NgForm){
+
+  save(customerForm: NgForm) {
     console.log(customerForm.form);
     console.log('Saved: ' + JSON.stringify(customerForm.value));
   }
