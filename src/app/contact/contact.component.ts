@@ -1,20 +1,27 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { Customer } from './customer';
+import { Component, OnInit } from "@angular/core";
+import { Customer } from "./customer";
+import { FormGroup, FormControl } from "@angular/forms";
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.css']
+  selector: "app-contact",
+  templateUrl: "./contact.component.html",
+  styleUrls: ["./contact.component.css"]
 })
-export class ContactComponent {
-
+export class ContactComponent implements OnInit {
+  customerForm: FormGroup;
   customer: Customer = new Customer();
 
-  save(customerForm: NgForm) {
-    console.log(customerForm.form);
-    console.log('Saved: ' + JSON.stringify(customerForm.value));
+  ngOnInit(): void {
+    this.customerForm = new FormGroup({
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      email: new FormControl(),
+      sendCatalog: new FormControl(true)
+    });
   }
 
+  save() {
+    console.log(this.customerForm);
+    console.log(this.customerForm.value);
+  }
 }
