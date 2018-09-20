@@ -7,10 +7,9 @@ import { Data } from './data';
   providedIn: 'root'
 })
 export class BlogService {
-
   private url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getData(): Observable<Data[]> {
     return this.http.get<Data[]>(this.url);
