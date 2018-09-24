@@ -12,6 +12,7 @@ export class ChartComponent {
   constructor() {
     this.data = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      hoverBorderWidth: 5,
       datasets: [
         {
           label: '1st',
@@ -40,16 +41,24 @@ export class ChartComponent {
         position: 'top'
       },
       tooltips: {
-        mode: 'nearest',
+        mode: 'point',
         callbacks: {
           label: function(tooltipItem, data) {
             var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-            if (label) {
-              label += '::';
-            }
+            label += ' result: ';
             label += Math.round(tooltipItem.yLabel * 100) / 100;
             return label;
+          },
+          title: function(tooltipItems, data) {
+            var title;
+            tooltipItems.map(function(tooltipItem) {
+              title = data.datasets[tooltipItem.datasetIndex].title || '';
+              title += tooltipItem.xLabel;
+              if (tooltipItem.xLabel == 'May') {
+                title += '**';
+              }
+            });
+            return title;
           }
         }
       },
@@ -58,7 +67,7 @@ export class ChartComponent {
         yAxes: [
           {
             ticks: {
-              callback: function(value, index, values) {
+              callback: function(value) {
                 return value + 'km';
               }
             }
