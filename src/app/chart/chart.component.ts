@@ -8,8 +8,10 @@ import { Component } from '@angular/core';
 export class ChartComponent {
   data: any;
   options: any;
+  type: any;
 
   constructor() {
+    this.type = 'horizontalBar';
     this.data = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       hoverBorderWidth: 5,
@@ -39,6 +41,9 @@ export class ChartComponent {
       },
       legend: {
         position: 'top'
+      },
+      hover: {
+        mode: 'single'
       },
       tooltips: {
         mode: 'point',

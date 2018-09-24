@@ -3,5 +3,6 @@
         <h4><span>{{ item.id }}. </span>{{ item.title }}</h4>
         <p>{{ item.body }}</p>
     </div>
-    <pagination-controls (pageChange)="p = $event" directionLinks="false"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event"
+                         directionLinks="false"></pagination-controls>
 </div>

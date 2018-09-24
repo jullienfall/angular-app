@@ -8,11 +8,7 @@ import { BlogService } from './blog.service';
 import { BlogComponent } from './blog.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    NgxPaginationModule
-  ],
+  imports: [CommonModule, HttpClientModule, NgxPaginationModule],
   providers: [BlogService],
   declarations: [BlogComponent]
 })
