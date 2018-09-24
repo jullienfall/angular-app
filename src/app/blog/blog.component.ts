@@ -8,13 +8,10 @@ import { Data } from './data';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-
   data: Data[];
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.blogService.getData().subscribe(res => this.data = res);
+    this.blogService.getData().subscribe(res => (this.data = res));
   }
-
-
 }

@@ -15,13 +15,7 @@ import { ChartComponent } from './chart/chart.component';
 import { BlogModule } from './blog/blog.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ContactComponent,
-    FooterComponent,
-    IconsComponent,
-    ChartComponent
-  ],
+  declarations: [AppComponent, ContactComponent, FooterComponent, IconsComponent, ChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
