@@ -1,149 +1,105 @@
 <div class="container">
   <form novalidate
-    (ngSubmit)="save()"
-    [formGroup]="customerForm">
+        (ngSubmit)="save()"
+        [formGroup]="customerForm">
     <fieldset>
 
       <div class="form-group row"
-        [ngClass]="{'has-error': (customerForm.get('firstName').touched ||
-                 customerForm.get('firstName').dirty) &&
-                 !customerForm.get('firstName').valid}">
+           [ngClass]="{'has-error': firstNameMessage}">
         <label class="col-md-2 control-label"
-          for="firstNameId">First Name</label>
+               for="firstNameId">First Name</label>
         <div class="col-md-8">
           <input class="form-control"
-            id="firstNameId"
-            type="text"
-            placeholder="First Name (required)"
-            formControlName="firstName" />
+                 id="firstNameId"
+                 type="text"
+                 placeholder="First Name (required)"
+                 formControlName="firstName" />
           <span class="help-block"
-            *ngIf="(customerForm.get('firstName').touched ||
-                          customerForm.get('firstName').dirty) &&
-                          customerForm.get('firstName').errors">
-            <span *ngIf="customerForm.get('firstName').errors.required">
-              Please enter your first name.</span>
-            <span *ngIf="customerForm.get('firstName').errors.minlength">
-              The first name must be longer than 3 characters
-            </span>
+                *ngIf="firstNameMessage">{{ firstNameMessage }}
           </span>
         </div>
       </div>
 
       <div class="form-group row"
-        [ngClass]="{'has-error': (customerForm.get('lastName').touched ||
-                 customerForm.get('lastName').dirty) &&
-                 !customerForm.get('lastName').valid}">
+           [ngClass]="{'has-error': lastNameMessage }">
         <label class="col-md-2 control-label"
-          for="lastNameId">Last Name</label>
+               for="lastNameId">Last Name</label>
         <div class="col-md-8">
           <input class="form-control"
-            id="lastNameId"
-            type="text"
-            placeholder="Last Name (required)"
-            formControlName="lastName" />
+                 id="lastNameId"
+                 type="text"
+                 placeholder="Last Name (required)"
+                 formControlName="lastName" />
           <span class="help-block"
-            *ngIf="(customerForm.get('lastName').touched ||
-                          customerForm.get('lastName').dirty) &&
-                          customerForm.get('lastName').errors">
-            <span *ngIf="customerForm.get('lastName').errors.required">
-              Please enter your last name.</span>
-            <span *ngIf="customerForm.get('lastName').errors.maxlength">
-              The first name must be not longer than 50 characters
-            </span>
+                *ngIf="lastNameMessage">{{ lastNameMessage }}
           </span>
         </div>
       </div>
 
       <div formGroupName="emailGroup"
-        [ngClass]="{'has-error': customerForm.get('emailGroup').errors}">
+           [ngClass]="{'has-error': emailGroupMessage }">
 
         <div class="form-group row"
-          [ngClass]="{'has-error': (customerForm.get('emailGroup.email').touched ||
-                     customerForm.get('emailGroup.email').dirty) &&
-                     !customerForm.get('emailGroup.email').valid}">
+             [ngClass]="{'has-error': emailMessage}">
           <label class="col-md-2 control-label"
-            for="emailId">Email</label>
+                 for="emailId">Email</label>
           <div class="col-md-8">
             <input class="form-control"
-              id="emailId"
-              type="text"
-              placeholder="Email"
-              formControlName="email" />
+                   id="emailId"
+                   type="text"
+                   placeholder="Email (required)"
+                   formControlName="email" />
             <span class="help-block"
-              *ngIf="(customerForm.get('emailGroup.email').touched ||
-                              customerForm.get('emailGroup.email').dirty) &&
-                              customerForm.get('emailGroup.email').errors">
-              <span *ngIf="customerForm.get('emailGroup.email').errors.required">
-                Please enter your email.</span>
-              <span *ngIf="customerForm.get('emailGroup.email').errors.pattern">
-                Please provide valid email
-              </span>
-            </span>
+                  *ngIf="emailMessage">{{ emailMessage }}</span>
           </div>
         </div>
 
         <div class="form-group row"
-          [ngClass]="{'has-error': (customerForm.get('emailGroup.confirmEmail').touched ||
-                     customerForm.get('emailGroup.confirmEmail').dirty) &&
-                     !customerForm.get('emailGroup.confirmEmail').valid}">
+             [ngClass]="{'has-error': confirmEmailMessage}">
           <label class="col-md-2 control-label"
-            for="confirmEmailId">Confirm Email</label>
+                 for="confirmEmailId">Confirm Email</label>
           <div class="col-md-8">
             <input class="form-control"
-              id="confirmEmailId"
-              type="text"
-              placeholder="Confirm email"
-              formControlName="confirmEmail" />
+                   id="confirmEmailId"
+                   type="text"
+                   placeholder="Confirm email (required)"
+                   formControlName="confirmEmail" />
             <span class="help-block"
-              *ngIf="(customerForm.get('emailGroup.confirmEmail').touched ||
-                               customerForm.get('emailGroup.confirmEmail').dirty) &&
-                               (customerForm.get('emailGroup.confirmEmail').errors ||
-                               customerForm.get('emailGroup').errors)">
-              <span *ngIf="customerForm.get('emailGroup.confirmEmail').errors?.required">
-                Please confirm email.</span>
-              <span *ngIf="customerForm.get('emailGroup').errors?.match">
-                Emails doesn't match.</span>
+                  *ngIf="confirmEmailMessage || emailGroupMessage">
+              {{ confirmEmailMessage || emailGroupMessage }}
             </span>
           </div>
         </div>
       </div>
 
       <div class="form-group row"
-        [ngClass]="{'has-error': !customerForm.get('phone').valid}">
+           [ngClass]="{'has-error': phoneMessage}">
         <label class="col-md-2 control-label"
-          for="phoneId">Phone</label>
+               for="phoneId">Phone</label>
         <div class="col-md-8">
           <input class="form-control"
-            id="phoneId"
-            type="tel"
-            placeholder="Phone"
-            formControlName="phone" />
+                 id="phoneId"
+                 type="tel"
+                 placeholder="Phone"
+                 formControlName="phone" />
           <span class="help-block"
-            *ngIf="customerForm.get('phone').errors">
-            <span *ngIf="customerForm.get('phone').errors.required">
-              Please provide your phone number
-            </span>
+                *ngIf="phoneMessage">{{ phoneMessage }}
           </span>
         </div>
       </div>
 
       <div class="form-group row"
-        [ngClass]="{'has-error': (customerForm.get('rating').touched ||
-                 customerForm.get('rating').dirty) && !customerForm.get('rating').valid}">
+           [ngClass]="{'has-error': ratingMessage}">
         <label class="col-md-2 control-label"
-          for="ratingId">Rating</label>
+               for="ratingId">Rating</label>
         <div class="col-md-8">
           <input class="form-control"
-            id="ratingId"
-            type="text"
-            placeholder="Rating"
-            formControlName="rating" />
+                 id="ratingId"
+                 type="text"
+                 placeholder="Rating"
+                 formControlName="rating" />
           <span class="help-block"
-            *ngIf="(customerForm.get('rating').touched ||
-                          customerForm.get('rating').dirty) && customerForm.get('rating').errors">
-            <span *ngIf="customerForm.get('rating').errors.range">
-              Please rate your experience from 1 to 5
-            </span>
+                *ngIf="ratingMessage">{{ ratingMessage }}
           </span>
         </div>
       </div>
@@ -153,24 +109,22 @@
         <div class="col-md-8">
           <div class="form-check form-check-inline">
             <label class="form-check-label"
-              for="email">
+                   for="email">
               <input class="form-check-input"
-                type="radio"
-                value="email"
-                id="email"
-                formControlName="notification"
-                (click)="setNotification('email')">Email
+                     type="radio"
+                     value="email"
+                     id="email"
+                     formControlName="notification">Email
             </label>
           </div>
           <div class="form-check form-check-inline">
             <label class="form-check-label"
-              for="text">
+                   for="text">
               <input class="form-check-input"
-                type="radio"
-                value="text"
-                id="text"
-                formControlName="notification"
-                (click)="setNotification('text')">Text
+                     type="radio"
+                     value="text"
+                     id="text"
+                     formControlName="notification">Text
             </label>
           </div>
         </div>
@@ -181,9 +135,9 @@
           <div class="form-check">
             <label class="form-check-label">
               <input class="form-check-input"
-                id="sendCatalogId"
-                type="checkbox"
-                formControlName="sendCatalog">Send me
+                     id="sendCatalogId"
+                     type="checkbox"
+                     formControlName="sendCatalog">Send me
               your catalog
             </label>
           </div>
@@ -191,61 +145,115 @@
       </div>
 
       <div *ngIf="customerForm.get('sendCatalog').value">
-        <div class="form-group row">
-          <label class="col-md-2 control-label">Address Type</label>
-          <div class="col-md-8">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input"
-                type="radio"
-                value="home"
-                id="home"
-                formControlName="cataloge">
-              <label class="form-check-label"
-                for="home">Home</label>
+        <div formArrayName="addresses"
+             *ngFor="let address of addresses.controls; let i=index">
+          <div [formGroupName]="i">
+            <div class="form-group row">
+              <label class="col-md-2 control-label">Address Type</label>
+              <div class="col-md-8">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input"
+                         type="radio"
+                         value="home"
+                         id="{{'home' + i}}"
+                         formControlName="addressType">
+                  <label class="form-check-label"
+                         attr.for="{{'home' + i}}">Home</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input"
+                         type="radio"
+                         value="work"
+                         id="{{'work' + i}}"
+                         formControlName="addressType">
+                  <label class="form-check-label"
+                         attr.for="{{'work' + i}}">Work</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input"
+                         type="radio"
+                         value="other"
+                         id="{{'other' + i}}"
+                         formControlName="addressType">
+                  <label class="form-check-label"
+                         attr.for="{{'other' + i}}">Other</label>
+                </div>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input"
-                type="radio"
-                value="work"
-                id="work"
-                formControlName="cataloge">
-              <label class="form-check-label"
-                for="work">Work</label>
+
+            <div class="row">
+              <div class="form-group row col-md-6">
+                <label class="col-md-2 control-label"
+                       attr.for="{{ 'countryId' + i }}">Country</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="{{ 'countryId' + i }}"
+                         type="text"
+                         placeholder="Country"
+                         formControlName="country" />
+                </div>
+              </div>
+
+              <div class="form-group row col-md-6">
+                <label class="col-md-2 control-label"
+                       attr.for="{{ 'cityId' + i }}">City</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="{{ 'cityId' + i }}"
+                         type="text"
+                         placeholder="City"
+                         formControlName="city" />
+                </div>
+              </div>
             </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input"
-                type="radio"
-                value="other"
-                id="other"
-                formControlName="cataloge">
-              <label class="form-check-label"
-                for="other">Other</label>
+
+            <div class="row">
+              <div class="form-group row col-md-6">
+                <label class="col-md-2 control-label"
+                       attr.for="{{ 'streetId' + i }}">Street</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="{{ 'streetId' + i }}"
+                         type="text"
+                         placeholder="Street"
+                         formControlName="street" />
+                </div>
+              </div>
+
+              <div class="form-group row col-md-6">
+                <label class="col-md-2 control-label"
+                       attr.for="{{ 'houseId' + i }}">House</label>
+                <div class="col-md-8">
+                  <input class="form-control"
+                         id="{{ 'houseId' + i }}"
+                         type="text"
+                         placeholder="House"
+                         formControlName="house" />
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary"
+                  [disabled]="!addresses.valid"
+                  (click)="addAddress()">Add address</button>
         </div>
       </div>
 
       <div class="form-group row justify-content-between">
         <div class="col-md-4">
-          <span>
-            <button class="btn btn-primary"
-              type="submit"
-              [disabled]='!customerForm.valid'>Save</button>
-          </span>
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]='!customerForm.valid'>Save</button>
         </div>
         <div class="col-md-4">
-          <span>
-            <button class="btn btn-primary"
-              (click)='populateTestData()'>Test Data</button>
-          </span>
+          <button class="btn btn-primary"
+                  (click)='populateTestData()'>Test Data</button>
         </div>
       </div>
 
     </fieldset>
   </form>
-
-  <br>Dirty: {{ customerForm.dirty}}
-  <br>Touched: {{ customerForm.touched }}
-  <br>Valid: {{ customerForm.valid }}
-  <br>Value: {{ customerForm.value | json }}
 </div>
