@@ -1,11 +1,10 @@
 <div class="container">
   <form novalidate
-        (ngSubmit)="save()"
+        (ngSubmit)="submit()"
         [formGroup]="customerForm">
     <fieldset>
 
-      <div class="form-group row"
-           [ngClass]="{'has-error': firstNameMessage}">
+      <div class="form-group row">
         <label class="col-md-2 control-label"
                for="firstNameId">First Name</label>
         <div class="col-md-8">
@@ -14,14 +13,11 @@
                  type="text"
                  placeholder="First Name (required)"
                  formControlName="firstName" />
-          <span class="help-block"
-                *ngIf="firstNameMessage">{{ firstNameMessage }}
-          </span>
+          <validation-messages [control]="customerForm.controls.firstName"></validation-messages>
         </div>
       </div>
 
-      <div class="form-group row"
-           [ngClass]="{'has-error': lastNameMessage }">
+      <div class="form-group row">
         <label class="col-md-2 control-label"
                for="lastNameId">Last Name</label>
         <div class="col-md-8">
@@ -30,17 +26,13 @@
                  type="text"
                  placeholder="Last Name (required)"
                  formControlName="lastName" />
-          <span class="help-block"
-                *ngIf="lastNameMessage">{{ lastNameMessage }}
-          </span>
+          <validation-messages [control]="customerForm.controls.lastName"></validation-messages>
         </div>
       </div>
 
-      <div formGroupName="emailGroup"
-           [ngClass]="{'has-error': emailGroupMessage }">
+      <div formGroupName="emailGroup">
 
-        <div class="form-group row"
-             [ngClass]="{'has-error': emailMessage}">
+        <div class="form-group row">
           <label class="col-md-2 control-label"
                  for="emailId">Email</label>
           <div class="col-md-8">
@@ -49,13 +41,11 @@
                    type="text"
                    placeholder="Email (required)"
                    formControlName="email" />
-            <span class="help-block"
-                  *ngIf="emailMessage">{{ emailMessage }}</span>
+            <validation-messages [control]="customerForm.controls.emailGroup.controls.email"></validation-messages>
           </div>
         </div>
 
-        <div class="form-group row"
-             [ngClass]="{'has-error': confirmEmailMessage}">
+        <div class="form-group row">
           <label class="col-md-2 control-label"
                  for="confirmEmailId">Confirm Email</label>
           <div class="col-md-8">
@@ -64,16 +54,14 @@
                    type="text"
                    placeholder="Confirm email (required)"
                    formControlName="confirmEmail" />
-            <span class="help-block"
-                  *ngIf="confirmEmailMessage || emailGroupMessage">
-              {{ confirmEmailMessage || emailGroupMessage }}
-            </span>
+            <validation-messages [control]="customerForm.controls.emailGroup.controls.confirmEmail"></validation-messages>
+            <validation-messages *ngIf="!customerForm.get('emailGroup.confirmEmail').errors"
+                                 [control]="customerForm.controls.emailGroup"></validation-messages>
           </div>
         </div>
       </div>
 
-      <div class="form-group row"
-           [ngClass]="{'has-error': phoneMessage}">
+      <div class="form-group row">
         <label class="col-md-2 control-label"
                for="phoneId">Phone</label>
         <div class="col-md-8">
@@ -82,14 +70,11 @@
                  type="tel"
                  placeholder="Phone"
                  formControlName="phone" />
-          <span class="help-block"
-                *ngIf="phoneMessage">{{ phoneMessage }}
-          </span>
+          <validation-messages [control]="customerForm.controls.phone"></validation-messages>
         </div>
       </div>
 
-      <div class="form-group row"
-           [ngClass]="{'has-error': ratingMessage}">
+      <div class="form-group row">
         <label class="col-md-2 control-label"
                for="ratingId">Rating</label>
         <div class="col-md-8">
@@ -98,9 +83,7 @@
                  type="text"
                  placeholder="Rating"
                  formControlName="rating" />
-          <span class="help-block"
-                *ngIf="ratingMessage">{{ ratingMessage }}
-          </span>
+          <validation-messages [control]="customerForm.controls.rating"></validation-messages>
         </div>
       </div>
 
@@ -137,14 +120,13 @@
               <input class="form-check-input"
                      id="sendCatalogId"
                      type="checkbox"
-                     formControlName="sendCatalog">Send me
-              your catalog
+                     formControlName="sendCatalog">Send me your catalog
             </label>
           </div>
         </div>
       </div>
 
-      <div *ngIf="customerForm.get('sendCatalog').value">
+      <div *ngIf="customerForm.controls.sendCatalog.value">
         <div formArrayName="addresses"
              *ngFor="let address of addresses.controls; let i=index">
           <div [formGroupName]="i">

@@ -1,31 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { ChartModule } from 'primeng/chart';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
-import { IconsComponent } from './icons/icons.component';
-import { ChartComponent } from './chart/chart.component';
 
 import { BlogModule } from './blog/blog.module';
+import { ContactModule } from './contact/contact.module';
+import { ChartsModule } from './chart/chart.module';
 
 @NgModule({
-  declarations: [AppComponent, ContactComponent, FooterComponent, IconsComponent, ChartComponent],
+  declarations: [AppComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     BlogModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    ChartModule,
-    BrowserAnimationsModule
+    ContactModule,
+    ChartsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
