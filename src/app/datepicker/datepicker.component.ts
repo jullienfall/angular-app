@@ -50,22 +50,4 @@ export class DatepickerComponent implements OnInit {
   getCopyOfOptions(): IMyDpOptions {
     return JSON.parse(JSON.stringify(this.myDatePickerOptions));
   }
-
-  setDateRange(): void {
-    let date = new Date();
-    this.myForm.patchValue({
-      myDateRange: {
-        beginDate: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate()
-        },
-        endDate: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate()
-        }
-      }
-    });
-  }
 }

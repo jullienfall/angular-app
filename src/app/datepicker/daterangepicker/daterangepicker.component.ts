@@ -29,22 +29,4 @@ export class DaterangepickerComponent implements OnInit {
       myDateRange: ['', Validators.required]
     });
   }
-
-  setDateRange(): void {
-    let date = new Date();
-    this.myForm.patchValue({
-      myDateRange: {
-        beginDate: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate()
-        },
-        endDate: {
-          year: date.getFullYear(),
-          month: date.getMonth() + 1,
-          day: date.getDate()
-        }
-      }
-    });
-  }
 }
