@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <label class="col-md-3">Pick single date:</label>
+    <form [formGroup]="myForm"
+          novalidate
+          class="col-md-3">
+      <my-date-picker name="mydate"
+                      [options]="myDatePickerOptions"
+                      formControlName="myDate"
+                      placeholder="dd.mm.yyyy"></my-date-picker>
+    </form>
+  </div>
+
+  <app-daterangepicker></app-daterangepicker>
+
+</div>

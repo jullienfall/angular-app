@@ -1,0 +1,11 @@
+<div class="row">
+  <label class="col-md-3">Pick date range:</label>
+  <form [formGroup]="myForm"
+        novalidate
+        class="col-md-3">
+    <my-date-range-picker name="mydaterange"
+                          [options]="myDateRangePickerOptions"
+                          formControlName="myDateRange"
+                          placeholder="dd.mm.yyyy - dd.mm.yyyy"></my-date-range-picker>
+  </form>
+</div>

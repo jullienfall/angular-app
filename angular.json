@@ -34,7 +34,9 @@
             "scripts": [
               "node_modules/chart.js/dist/Chart.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/mydatepicker/bundles/mydatepicker.umd.min.js",
+              "node_modules/mydaterangepicker/bundles/mydaterangepicker.umd.js"
             ]
           },
           "configurations": {
