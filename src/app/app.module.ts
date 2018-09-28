@@ -12,6 +12,7 @@ import { ContactModule } from './contact/contact.module';
 import { ChartsModule } from './chart/chart.module';
 import { ProductsModule } from './products/products.module';
 import { DatepickerModule } from './datepicker/datepicker.module';
+import { SliderModule } from './slider/slider.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
@@ -24,7 +25,8 @@ import { DatepickerModule } from './datepicker/datepicker.module';
     ChartsModule,
     BlogModule,
     ProductsModule,
-    DatepickerModule
+    DatepickerModule,
+    SliderModule
   ],
   bootstrap: [AppComponent]
 })
