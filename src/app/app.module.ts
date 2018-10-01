@@ -13,6 +13,7 @@ import { ChartsModule } from './chart/chart.module';
 import { ProductsModule } from './products/products.module';
 import { DatepickerModule } from './datepicker/datepicker.module';
 import { SliderModule } from './slider/slider.module';
+import { SwipersModule } from './swiper/swiper.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
@@ -26,7 +27,8 @@ import { SliderModule } from './slider/slider.module';
     BlogModule,
     ProductsModule,
     DatepickerModule,
-    SliderModule
+    SliderModule,
+    SwipersModule
   ],
   bootstrap: [AppComponent]
 })

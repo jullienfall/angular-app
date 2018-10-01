@@ -7,7 +7,8 @@ import { BlogComponent } from './blog/blog.component';
 import { ChartComponent } from './chart/chart.component';
 import { ProductsComponent } from './products/products.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
-import{SliderComponent} from './slider/slider.component';
+import { SliderComponent } from './slider/slider.component';
+import { SwiperComponent } from './swiper/swiper.component';
 
 const routes: Routes = [
   { path: 'blog', component: BlogComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'datepicker', component: DatepickerComponent },
   { path: 'slider', component: SliderComponent },
-
+  { path: 'swiper', component: SwiperComponent }
 ];
 
 @NgModule({

@@ -1,0 +1,9 @@
+.swiper-container {
+  padding: 80px 0;
+  background: rgba(78, 78, 74, 0.2);
+}
+
+.swiper-pagination-bullet {
+  height: 15px;
+  width: 15px;
+}

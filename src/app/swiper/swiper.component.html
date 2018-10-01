@@ -1,0 +1,17 @@
+<div class="swiper-container"
+  [swiper]="config"
+  [(index)]="index">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide col-md-12"
+      *ngFor="let video of slides">
+      <video controls
+        class="col-md-4"
+        src="{{ video.video1 }}"></video>
+      <video class="col-md-4"
+        src="{{ video.video2 }}"></video>
+      <video class="col-md-4"
+        src="{{ video.video3 }}"></video>
+    </div>
+  </div>
+  <div class="swiper-pagination"></div>
+</div>
