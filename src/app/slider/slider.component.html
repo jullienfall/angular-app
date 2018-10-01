@@ -1,40 +1,33 @@
-<div id="carouselExampleIndicators"
-     class="carousel slide"
-     data-ride="carousel"
-     data-interval=0>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval=0>
   <h1>Videos</h1>
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators"
-        data-slide-to="0"
-        class="active"></li>
-    <li data-target="#carouselExampleIndicators"
-        data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators"
-        data-slide-to="2"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
   <div class="carousel-inner center">
-    <div class="carousel-item active"
-         [ngClass]="{'active': i === 0}"
-         *ngFor="let slide of slides; let i = index">
+    <div class="carousel-item active" [ngClass]="{'active': i === 0}" *ngFor="let slide of slides; let i = index">
       <div class="row">
         <div class="col-md-4">
-          <button (click)="playPause(video1)"><i class="fa fa-chevron-circle-right"></i></button>
-          <video #video1
-                 preload="auto"
-                 class="col-md-12"
-                 src="{{ slide.video1 }}"></video>
+          <vg-player>
+            <vg-overlay-play></vg-overlay-play>
+            <video #mediaOne [vgMedia]="mediaOne" id="playerOne" preload="auto" src="{{ slide.video1 }}">
+            </video>
+          </vg-player>
         </div>
         <div class="col-md-4">
-          <button (click)="playPause(video2)"><i class="fa fa-chevron-circle-right"></i></button>
-          <video #video2
-                 class="col-md-12"
-                 src="{{ slide.video2 }}"></video>
+          <vg-player>
+            <vg-overlay-play></vg-overlay-play>
+            <video #mediaTwo [vgMedia]="mediaTwo" id="playerTwo" preload="auto" src="{{ slide.video2 }}">
+            </video>
+          </vg-player>
         </div>
         <div class="col-md-4">
-          <button (click)="playPause(video3)"><i class="fa fa-chevron-circle-right"></i></button>
-          <video #video3
-                 class="col-md-12"
-                 src="{{ slide.video3 }}"></video>
+          <vg-player>
+            <vg-overlay-play></vg-overlay-play>
+            <video #mediaThree [vgMedia]="mediaThree" id="playerThree" preload="auto" src="{{ slide.video3 }}">
+            </video>
+          </vg-player>
         </div>
       </div>
     </div>
