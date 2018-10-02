@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-swiper',
   templateUrl: './swiper.component.html',
   styleUrls: ['./swiper.component.css']
 })
-export class SwiperComponent implements OnInit {
+export class SwiperComponent {
   public slides: Array<Object> = [
     {
       video1: 'http://static.videogular.com/assets/videos/videogular.mp4',
@@ -24,6 +24,4 @@ export class SwiperComponent implements OnInit {
     }
   ];
   constructor() {}
-
-  ngOnInit() {}
 }

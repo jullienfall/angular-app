@@ -11,8 +11,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   slidesPerView: 'auto',
   pagination: {
     el: '.swiper-pagination',
-    clickable: true,
-    dynamicMainBullets: 1
+    clickable: true
   }
 };
 
@@ -27,6 +26,3 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   ]
 })
 export class SwipersModule {}
-function newFunction(): string {
-  return 'swiper-pagination-btn';
-}
