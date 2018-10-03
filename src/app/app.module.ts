@@ -15,6 +15,7 @@ import { DatepickerModule } from './datepicker/datepicker.module';
 import { SliderModule } from './slider/slider.module';
 import { SwipersModule } from './swiper/swiper.module';
 import { ModalModule } from './modal/modal.module';
+import { NgrxModule } from './ngrx/ngrx.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
@@ -30,7 +31,8 @@ import { ModalModule } from './modal/modal.module';
     DatepickerModule,
     SliderModule,
     SwipersModule,
-    ModalModule
+    ModalModule,
+    NgrxModule
   ],
   bootstrap: [AppComponent]
 })
