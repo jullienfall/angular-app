@@ -1,0 +1,10 @@
+.card {
+  padding: 15px 0;
+  margin: auto;
+  text-align: center;
+  background: rgba(68, 59, 68, 0.2);
+}
+
+.btn {
+  margin: 15px;
+}

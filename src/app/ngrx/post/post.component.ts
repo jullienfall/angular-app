@@ -23,7 +23,8 @@ export class PostComponent {
   }
 
   editText() {
-    this.store.dispatch(new PostActions.EditText(this.text));
+    if (this.text != '' && this.text != undefined)
+      this.store.dispatch(new PostActions.EditText(this.text));
     this.text = '';
   }
 

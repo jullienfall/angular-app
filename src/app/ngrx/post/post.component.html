@@ -1,10 +1,13 @@
-<div *ngIf="post | async as p">
-  <h2>{{ p.text }}</h2>
-  <h4>Votes: {{ p.likes }}</h4>
-
-  <button class="btn" (click)="upvote()">Upvote</button>
-  <button class="btn" (click)="downvote()">Downvote</button>
-  <button class="btn" (click)="reset()">Reset</button>
-  <input [(ngModel)]="text">
-  <button class="btn" (click)="editText()">Edit</button>
+<div class="card col-md-7" *ngIf="post | async as p">
+  <div class="card-body">
+    <h2 class="card-title">Title: {{ p.text }}</h2>
+    <h4>Votes: {{ p.likes }}</h4>
+    <button class="btn btn-success" (click)="upvote()">Upvote</button>
+    <button class="btn btn-danger" (click)="downvote()">Downvote</button>
+    <button class="btn btn-info" (click)="reset()">Reset</button>
+    <div class="row justify-content-center">
+      <input class="form-control col-md-6" [(ngModel)]="text">
+      <button class="btn btn-warning col-md-4" (click)="editText()">Edit</button>
+    </div>
+  </div>
 </div>
