@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 
-export function simpleReducer(state: string = 'Hello world', action: Action) {
+const defaultState = 'Hello world';
+
+export function simpleReducer(state: string = defaultState, action: Action) {
   switch (action.type) {
     case 'SPANISH':
       return (state = 'Hola Mundo');
