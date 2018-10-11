@@ -11,6 +11,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SwiperComponent } from './swiper/swiper.component';
 import { ModalComponent } from './modal/modal.component';
 import { NgrxComponent } from './ngrx/ngrx.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   { path: 'blog', component: BlogComponent },
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'slider', component: SliderComponent },
   { path: 'swiper', component: SwiperComponent },
   { path: 'modal', component: ModalComponent },
-  { path: 'ngrx', component: NgrxComponent }
+  { path: 'ngrx', component: NgrxComponent },
+  { path: 'error', component: ErrorComponent }
 ];
 
 @NgModule({

@@ -14,4 +14,9 @@ export class BlogService {
   getData(): Observable<Data[]> {
     return this.http.get<Data[]>(this.url);
   }
+
+  // .pipe(catchError(this.errorHandler))
+  // errorHandler(error: HttpErrorResponse) {
+  //   return throwError(error.message || 'Server Error');
+  // }
 }
