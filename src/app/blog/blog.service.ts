@@ -7,7 +7,7 @@ import { Data } from './data';
   providedIn: 'root'
 })
 export class BlogService {
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'api/blogs';
 
   constructor(private http: HttpClient) {}
 

@@ -17,6 +17,10 @@ import { SwipersModule } from './swiper/swiper.module';
 import { ModalModule } from './modal/modal.module';
 import { NgrxModule } from './ngrx/ngrx.module';
 
+// in-memory-data.service
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
+
 @NgModule({
   declarations: [AppComponent, FooterComponent],
   imports: [
@@ -32,7 +36,8 @@ import { NgrxModule } from './ngrx/ngrx.module';
     SliderModule,
     SwipersModule,
     ModalModule,
-    NgrxModule
+    NgrxModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   bootstrap: [AppComponent]
 })
