@@ -1,5 +1,8 @@
 export interface Product {
-  id: number;
-  name: string;
-  url: string;
+  question: string;
+  image: {
+    id: number;
+    name: string;
+    url: string;
+  };
 }
