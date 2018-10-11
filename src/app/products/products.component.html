@@ -1,11 +1,46 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-4"
-         *ngFor="let product of products">
-      <p>{{ product.name }}</p>
-      <img class="col-md-12"
-           [src]="product.url"
-           alt="">
+  <button *ngIf="btn"
+          class="btn btn-start col-md-3"
+          (click)="getProduct(n)">Start</button>
+  <form *ngIf="form"
+        novalidate
+        (ngSubmit)="submit(product.question, customerForm.get('answer').value)"
+        [formGroup]="customerForm">
+    <fieldset>
+      <div class="form-check">
+        <h4>{{ product.question }}</h4>
+        <div class="row justify-content-center">
+          <div *ngFor="let image of product.image; let i=index"
+               class="col-lg-4 col-md-6">
+            <input class="form-check-input"
+                   type="radio"
+                   name="answer"
+                   id="{{'answer' + i}}"
+                   value="{{ image.name }}"
+                   formControlName="answer">
+            <label class="form-check-label"
+                   attr.for="{{'answer' + i}}">
+              <img [src]="image.url"
+                   alt="">
+              {{ image.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-secondary col-md-3"
+              [disabled]='!customerForm.valid'>Submit</button>
+    </fieldset>
+  </form>
+
+  <div class="card"
+       *ngIf="result">
+    <h4>Your answers:</h4>
+    <div class="row justify-content-center">
+      <div class="col-sm-6"
+           *ngFor="let item of feedback">
+        <p>{{ item }}</p>
+      </div>
     </div>
   </div>
+
 </div>
