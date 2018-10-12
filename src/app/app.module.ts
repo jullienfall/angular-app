@@ -19,6 +19,7 @@ import { SliderModule } from './slider/slider.module';
 import { SwipersModule } from './swiper/swiper.module';
 import { ModalModule } from './modal/modal.module';
 import { NgrxModule } from './ngrx/ngrx.module';
+import { UserModule } from './login-in/user.module';
 
 // in-memory-data.service
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -43,6 +44,7 @@ import { ErrorHandlerService } from './error-handler.service';
     SwipersModule,
     ModalModule,
     NgrxModule,
+    UserModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   bootstrap: [AppComponent],

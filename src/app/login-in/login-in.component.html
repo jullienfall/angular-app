@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">Log In Form</div>
+
+    <div class="card-body">
+      <form novalidate
+            (ngSubmit)="login(loginForm)"
+            [formGroup]="loginForm">
+        <fieldset>
+
+          <div class="form-group row">
+            <label class="col-md-2 control-label"
+                   for="userName">User name:</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="userName"
+                     [type]="text"
+                     placeholder="Enter your user name"
+                     formControlName="userName" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-md-2 control-label"
+                   for="password">Password:</label>
+            <div class="col-md-8">
+              <input class="form-control"
+                     id="password"
+                     [type]="maskPassword ? 'password' : 'text'"
+                     placeholder="Enter your password"
+                     formControlName="password" />
+            </div>
+          </div>
+          <button class="btn btn-primary"
+                  type="submit"
+                  [disabled]='!loginForm.valid'>Log In</button>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="card-footer">
+      <div class="row">
+        <div class="form-check col-md-7">
+          <label>
+            <input class="form-check-input"
+                   type="checkbox"
+                   (change)="checkChanged($event.target.checked)"
+                   [checked]="maskPassword">
+            Mask password
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
