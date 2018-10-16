@@ -10,13 +10,11 @@ import { LoginInComponent } from './login-in.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/user.reducer';
 
-const userRoutes: Routes = [{ path: 'login', component: LoginInComponent }];
-
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule.forChild(userRoutes),
+    RouterModule.forChild([{ path: 'login', component: LoginInComponent }]),
     StoreModule.forFeature('users', reducer)
   ],
   declarations: [LoginInComponent],
