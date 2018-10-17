@@ -1,5 +1,5 @@
 .diagramDiv {
   width: 100vw;
-  height: 80vh;
+  min-height: 80vh;
   margin: 0;
 }

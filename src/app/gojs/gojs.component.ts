@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import * as go from 'gojs';
 
 @Component({
@@ -6,7 +6,7 @@ import * as go from 'gojs';
   templateUrl: './gojs.component.html',
   styleUrls: ['./gojs.component.css']
 })
-export class GojsComponent {
+export class GojsComponent implements OnInit {
   diagram: go.Diagram = new go.Diagram();
 
   @ViewChild('diagramDiv')
@@ -14,6 +14,8 @@ export class GojsComponent {
 
   constructor() {
     const $ = go.GraphObject.make;
+    let nodeIdCounter = -1;
+    const model = $(go.TreeModel);
     this.diagram = new go.Diagram();
     this.diagram.initialContentAlignment = go.Spot.Center;
     this.diagram.undoManager.isEnabled = true;
@@ -26,6 +28,24 @@ export class GojsComponent {
       go.Node,
       'Horizontal',
       { background: '#17a2b1' },
+      {
+        doubleClick: (e, obj) => {
+          var clicked = obj.part;
+          if (clicked !== null) {
+            var thisemp = clicked.data;
+            this.diagram.startTransaction('add employee');
+            var newemp = {
+              key: getNextKey(),
+              name: '(new person)',
+              title: '',
+              source: 'https://www.acrpnet.org/wp-content/uploads/2016/09/User-Icon-Gray.jpg',
+              parent: thisemp.key
+            };
+            this.diagram.model.addNodeData(newemp);
+            this.diagram.commitTransaction('add employee');
+          }
+        }
+      },
       $(
         go.Panel,
         'Horizontal',
@@ -33,7 +53,7 @@ export class GojsComponent {
           go.Picture,
           {
             name: 'Picture',
-            desiredSize: new go.Size(60, 50),
+            desiredSize: new go.Size(65, 50),
             margin: new go.Margin(6, 8, 6, 10)
           },
           new go.Binding('source')
@@ -105,6 +125,50 @@ export class GojsComponent {
       )
     );
 
+    this.diagram.nodeTemplate.contextMenu = $(
+      go.Adornment,
+      'Vertical',
+      $('ContextMenuButton', $(go.TextBlock, 'Remove Role'), {
+        click: (e, obj) => {
+          // reparent the subtree to this node's boss, then remove the node
+          var node = obj.part.adornedPart;
+          if (node !== null && node.data.key != 1) {
+            this.diagram.startTransaction('reparent remove');
+            var chl = node.findTreeChildrenNodes();
+            // iterate through the children and set their parent key to our selected node's parent key
+            while (chl.next()) {
+              var emp = chl.value;
+              model.setParentKeyForNodeData(emp.data, node.findTreeParentNode().data.key);
+            }
+            // and now remove the selected node itself
+            model.removeNodeData(node.data);
+            this.diagram.commitTransaction('reparent remove');
+          }
+        }
+      }),
+      $('ContextMenuButton', $(go.TextBlock, 'Remove Department'), {
+        click: (e, obj) => {
+          // remove the whole subtree, including the node itself
+          var node = obj.part.adornedPart;
+          if (node !== null) {
+            this.diagram.startTransaction('remove dept');
+            this.diagram.removeParts(node.findTreeParts(), true);
+            this.diagram.commitTransaction('remove dept');
+          }
+        }
+      })
+    );
+
+    this.diagram.model.nodeKeyProperty;
+
+    let getNextKey = () => {
+      var key = nodeIdCounter;
+      while (this.diagram.model.findNodeDataForKey(key) !== null) {
+        key = nodeIdCounter--;
+      }
+      return key;
+    };
+
     // define a Link template that routes orthogonally, with no arrowhead
     this.diagram.linkTemplate = $(
       go.Link,
@@ -112,14 +176,13 @@ export class GojsComponent {
       $(go.Shape, { strokeWidth: 3, stroke: '#555' })
     ); // the link shape
 
-    var model = $(go.TreeModel);
     model.nodeDataArray = [
       {
         key: 1,
         name: 'Stella Payne Diaz',
         title: 'CEO',
         source:
-          'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+          'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&h=350'
       },
       {
         key: 2,
@@ -127,7 +190,7 @@ export class GojsComponent {
         title: 'VP Marketing/Sales',
         parent: 1,
         source:
-          'https://images.pexels.com/photos/756453/pexels-photo-756453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350'
       },
       {
         key: 3,
@@ -135,7 +198,7 @@ export class GojsComponent {
         title: 'Sales',
         parent: 2,
         source:
-          'https://images.pexels.com/photos/555790/pexels-photo-555790.png?auto=compress&cs=tinysrgb&h=350'
+          'https://images.pexels.com/photos/324658/pexels-photo-324658.jpeg?auto=compress&cs=tinysrgb&h=350'
       },
       {
         key: 4,
@@ -143,7 +206,7 @@ export class GojsComponent {
         title: 'VP Engineering',
         parent: 1,
         source:
-          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350'
+          'https://images.pexels.com/photos/756453/pexels-photo-756453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
       },
       {
         key: 5,
@@ -167,7 +230,7 @@ export class GojsComponent {
         title: 'Sales Rep',
         parent: 3,
         source:
-          'https://images.pexels.com/photos/936229/pexels-photo-936229.jpeg?auto=compress&cs=tinysrgb&h=350'
+          'https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&h=350'
       },
       {
         key: 8,
@@ -191,7 +254,7 @@ export class GojsComponent {
         title: 'Process',
         parent: 5,
         source:
-          'https://images.pexels.com/photos/598745/pexels-photo-598745.jpeg?auto=compress&cs=tinysrgb&h=350'
+          'https://images.pexels.com/photos/818819/pexels-photo-818819.jpeg?auto=compress&cs=tinysrgb&h=350'
       },
 
       {
