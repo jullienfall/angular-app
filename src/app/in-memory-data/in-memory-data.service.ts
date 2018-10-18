@@ -234,6 +234,104 @@ export class InMemoryDataService implements InMemoryDbService {
           'reprehenderit quos placeat\nvelit minima officia dolores impedit repudiandae molestiae nam\nvoluptas recusandae quis delectus\nofficiis harum fugiat vitae'
       }
     ];
-    return { products, blogs };
+    const gojs = [
+      {
+        key: 1,
+        name: 'Stella Payne Diaz',
+        title: 'CEO',
+        source:
+          'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 2,
+        name: 'Luke Warm',
+        title: 'VP Marketing/Sales',
+        parent: 1,
+        source:
+          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 3,
+        name: 'Meg Meehan Hoffa',
+        title: 'Sales',
+        parent: 2,
+        source:
+          'https://images.pexels.com/photos/324658/pexels-photo-324658.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 4,
+        name: 'Peggy Flaming',
+        title: 'VP Engineering',
+        parent: 1,
+        source:
+          'https://images.pexels.com/photos/756453/pexels-photo-756453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+      },
+      {
+        key: 5,
+        name: 'Saul Wellingood',
+        title: 'Manufacturing',
+        parent: 4,
+        source:
+          'https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 6,
+        name: 'Al Ligori',
+        title: 'Marketing',
+        parent: 2,
+        source:
+          'https://images.pexels.com/photos/407237/pexels-photo-407237.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 7,
+        name: 'Dot Stubadd',
+        title: 'Sales Rep',
+        parent: 3,
+        source:
+          'https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 8,
+        name: 'Les Ismore',
+        title: 'Project Mgr',
+        parent: 5,
+        source:
+          'https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 9,
+        name: 'April Lynn Parris',
+        title: 'Events Mgr',
+        parent: 6,
+        source:
+          'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 10,
+        name: 'Anita Hammer',
+        title: 'Process',
+        parent: 5,
+        source:
+          'https://images.pexels.com/photos/818819/pexels-photo-818819.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+
+      {
+        key: 11,
+        name: 'Evan Elpus',
+        title: 'Quality',
+        parent: 5,
+        source:
+          'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&h=350'
+      },
+      {
+        key: 12,
+        name: 'Lotta B. Essen',
+        title: 'Sales Rep',
+        parent: 3,
+        source:
+          'https://images.pexels.com/photos/462680/pexels-photo-462680.jpeg?auto=compress&cs=tinysrgb&h=350s'
+      }
+    ];
+    return { products, blogs, gojs };
   }
 }

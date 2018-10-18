@@ -1,4 +1,9 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
+
+// service
+import { GojsService } from './gojs.service';
+
+// GoJS
 import * as go from 'gojs';
 
 @Component({
@@ -6,24 +11,37 @@ import * as go from 'gojs';
   templateUrl: './gojs.component.html',
   styleUrls: ['./gojs.component.css']
 })
-export class GojsComponent implements OnInit {
-  diagram: go.Diagram = new go.Diagram();
+export class GojsComponent implements OnInit, OnDestroy {
+  private subscription;
+  diagram: go.Diagram;
+  $ = go.GraphObject.make;
+  model = this.$(go.TreeModel);
 
   @ViewChild('diagramDiv')
   private diagramRef: ElementRef;
 
-  constructor() {
-    const $ = go.GraphObject.make;
-    const model = $(go.TreeModel);
+  constructor(private gojsService: GojsService) {}
+
+  ngOnInit() {
+    this.subscription = this.gojsService
+      .getData()
+      .subscribe(value => (this.model.nodeDataArray = value))
+      .add(() => {
+        this.goJS();
+        this.diagram.div = this.diagramRef.nativeElement;
+      });
+  }
+
+  goJS() {
     this.diagram = new go.Diagram();
     this.diagram.initialContentAlignment = go.Spot.Center;
     this.diagram.undoManager.isEnabled = true;
-    this.diagram.layout = $(go.TreeLayout, {
+    this.diagram.layout = this.$(go.TreeLayout, {
       angle: 90,
       layerSpacing: 35
     });
 
-    this.diagram.nodeTemplate = $(
+    this.diagram.nodeTemplate = this.$(
       go.Node,
       'Horizontal',
       { background: '#17a2b1' },
@@ -79,7 +97,7 @@ export class GojsComponent implements OnInit {
           }
         }
       },
-      $(
+      this.$(
         go.Panel,
         'Horizontal',
         {
@@ -89,7 +107,7 @@ export class GojsComponent implements OnInit {
           toLinkable: true,
           cursor: 'pointer'
         },
-        $(
+        this.$(
           go.Picture,
           {
             name: 'Picture',
@@ -98,7 +116,7 @@ export class GojsComponent implements OnInit {
           },
           new go.Binding('source')
         ),
-        $(
+        this.$(
           go.Panel,
           'Table',
           {
@@ -106,8 +124,8 @@ export class GojsComponent implements OnInit {
             margin: new go.Margin(6, 10, 0, 3),
             defaultAlignment: go.Spot.Left
           },
-          $(go.RowColumnDefinition, { column: 2, width: 4 }),
-          $(
+          this.$(go.RowColumnDefinition, { column: 2, width: 4 }),
+          this.$(
             go.TextBlock,
             {
               row: 0,
@@ -120,8 +138,8 @@ export class GojsComponent implements OnInit {
             },
             new go.Binding('text', 'name').makeTwoWay()
           ),
-          $(go.TextBlock, 'Title: ', { row: 1, column: 0 }),
-          $(
+          this.$(go.TextBlock, 'Title: ', { row: 1, column: 0 }),
+          this.$(
             go.TextBlock,
             {
               row: 1,
@@ -134,21 +152,21 @@ export class GojsComponent implements OnInit {
             },
             new go.Binding('text', 'title').makeTwoWay()
           ),
-          $(
+          this.$(
             go.TextBlock,
             { row: 2, column: 0 },
             new go.Binding('text', 'key', function(v) {
               return 'ID: ' + v;
             })
           ),
-          $(
+          this.$(
             go.TextBlock,
             { name: 'boss', row: 2, column: 3 },
             new go.Binding('text', 'parent', function(v) {
               return 'Boss: ' + v;
             })
           ),
-          $(
+          this.$(
             go.TextBlock,
             {
               row: 3,
@@ -165,10 +183,10 @@ export class GojsComponent implements OnInit {
       )
     );
 
-    this.diagram.nodeTemplate.contextMenu = $(
+    this.diagram.nodeTemplate.contextMenu = this.$(
       go.Adornment,
       'Vertical',
-      $('ContextMenuButton', $(go.TextBlock, 'Remove Role'), {
+      this.$('ContextMenuButton', this.$(go.TextBlock, 'Remove Role'), {
         click: (e, obj) => {
           // reparent the subtree to this node's boss, then remove the node
           var node = obj.part.adornedPart;
@@ -178,15 +196,15 @@ export class GojsComponent implements OnInit {
             // iterate through the children and set their parent key to our selected node's parent key
             while (chl.next()) {
               var emp = chl.value;
-              model.setParentKeyForNodeData(emp.data, node.findTreeParentNode().data.key);
+              this.model.setParentKeyForNodeData(emp.data, node.findTreeParentNode().data.key);
             }
             // and now remove the selected node itself
-            model.removeNodeData(node.data);
+            this.model.removeNodeData(node.data);
             this.diagram.commitTransaction('reparent remove');
           }
         }
       }),
-      $('ContextMenuButton', $(go.TextBlock, 'Remove Department'), {
+      this.$('ContextMenuButton', this.$(go.TextBlock, 'Remove Department'), {
         click: (e, obj) => {
           // remove the whole subtree, including the node itself
           var node = obj.part.adornedPart;
@@ -217,115 +235,17 @@ export class GojsComponent implements OnInit {
     };
 
     // define the Link template
-    this.diagram.linkTemplate = $(
+    this.diagram.linkTemplate = this.$(
       go.Link,
       go.Link.Orthogonal,
       { corner: 5, relinkableFrom: true, relinkableTo: true },
-      $(go.Shape, { strokeWidth: 4, stroke: '#00a4a4' })
+      this.$(go.Shape, { strokeWidth: 4, stroke: '#00a4a4' })
     ); // the link shape
 
-    model.nodeDataArray = [
-      {
-        key: 1,
-        name: 'Stella Payne Diaz',
-        title: 'CEO',
-        source:
-          'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 2,
-        name: 'Luke Warm',
-        title: 'VP Marketing/Sales',
-        parent: 1,
-        source:
-          'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 3,
-        name: 'Meg Meehan Hoffa',
-        title: 'Sales',
-        parent: 2,
-        source:
-          'https://images.pexels.com/photos/324658/pexels-photo-324658.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 4,
-        name: 'Peggy Flaming',
-        title: 'VP Engineering',
-        parent: 1,
-        source:
-          'https://images.pexels.com/photos/756453/pexels-photo-756453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-      },
-      {
-        key: 5,
-        name: 'Saul Wellingood',
-        title: 'Manufacturing',
-        parent: 4,
-        source:
-          'https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 6,
-        name: 'Al Ligori',
-        title: 'Marketing',
-        parent: 2,
-        source:
-          'https://images.pexels.com/photos/407237/pexels-photo-407237.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 7,
-        name: 'Dot Stubadd',
-        title: 'Sales Rep',
-        parent: 3,
-        source:
-          'https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 8,
-        name: 'Les Ismore',
-        title: 'Project Mgr',
-        parent: 5,
-        source:
-          'https://images.pexels.com/photos/709188/pexels-photo-709188.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 9,
-        name: 'April Lynn Parris',
-        title: 'Events Mgr',
-        parent: 6,
-        source:
-          'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 10,
-        name: 'Anita Hammer',
-        title: 'Process',
-        parent: 5,
-        source:
-          'https://images.pexels.com/photos/818819/pexels-photo-818819.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-
-      {
-        key: 11,
-        name: 'Evan Elpus',
-        title: 'Quality',
-        parent: 5,
-        source:
-          'https://images.pexels.com/photos/1036627/pexels-photo-1036627.jpeg?auto=compress&cs=tinysrgb&h=350'
-      },
-      {
-        key: 12,
-        name: 'Lotta B. Essen',
-        title: 'Sales Rep',
-        parent: 3,
-        source:
-          'https://images.pexels.com/photos/462680/pexels-photo-462680.jpeg?auto=compress&cs=tinysrgb&h=350s'
-      }
-    ];
-    this.diagram.model = model;
+    this.diagram.model = this.model;
   }
 
-  ngOnInit() {
-    this.diagram.div = this.diagramRef.nativeElement;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
