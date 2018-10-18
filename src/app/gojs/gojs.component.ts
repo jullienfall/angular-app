@@ -14,7 +14,6 @@ export class GojsComponent implements OnInit {
 
   constructor() {
     const $ = go.GraphObject.make;
-    let nodeIdCounter = -1;
     const model = $(go.TreeModel);
     this.diagram = new go.Diagram();
     this.diagram.initialContentAlignment = go.Spot.Center;
@@ -46,9 +45,50 @@ export class GojsComponent implements OnInit {
           }
         }
       },
+      {
+        // handle dragging a Node onto a Node to (maybe) change the reporting relationship
+        mouseDragEnter: (e, node, prev) => {
+          var diagram = node.diagram;
+          var selnode = diagram.selection.first();
+          if (!mayWorkFor(selnode, node)) return;
+          var shape = node.findObject('SHAPE');
+          if (shape) {
+            shape._prevFill = shape.fill; // remember the original brush
+            shape.fill = 'darkred';
+          }
+        },
+        mouseDragLeave: (e, node, next) => {
+          var shape = node.findObject('SHAPE');
+          if (shape && shape._prevFill) {
+            shape.fill = shape._prevFill; // restore the original brush
+          }
+        },
+        mouseDrop: (e, node) => {
+          var diagram = node.diagram;
+          var selnode = diagram.selection.first(); // assume just one Node in selection
+          if (mayWorkFor(selnode, node)) {
+            // find any existing link into the selected node
+            var link = selnode.findTreeParentLink();
+            if (link !== null) {
+              // reconnect any existing link
+              link.fromNode = node;
+            } else {
+              // else create a new link
+              diagram.toolManager.linkingTool.insertLink(node, node.port, selnode, selnode.port);
+            }
+          }
+        }
+      },
       $(
         go.Panel,
         'Horizontal',
+        {
+          name: 'SHAPE',
+          portId: '',
+          fromLinkable: true,
+          toLinkable: true,
+          cursor: 'pointer'
+        },
         $(
           go.Picture,
           {
@@ -159,7 +199,14 @@ export class GojsComponent implements OnInit {
       })
     );
 
-    this.diagram.model.nodeKeyProperty;
+    let mayWorkFor = (node1, node2) => {
+      if (!(node1 instanceof go.Node)) return false; // must be a Node
+      if (node1 === node2) return false; // cannot work for yourself
+      if (node2.isInTreeOf(node1)) return false; // cannot work for someone who works for you
+      return true;
+    };
+
+    let nodeIdCounter = -1;
 
     let getNextKey = () => {
       var key = nodeIdCounter;
@@ -169,11 +216,12 @@ export class GojsComponent implements OnInit {
       return key;
     };
 
-    // define a Link template that routes orthogonally, with no arrowhead
+    // define the Link template
     this.diagram.linkTemplate = $(
       go.Link,
-      { routing: go.Link.Orthogonal, corner: 5 },
-      $(go.Shape, { strokeWidth: 3, stroke: '#555' })
+      go.Link.Orthogonal,
+      { corner: 5, relinkableFrom: true, relinkableTo: true },
+      $(go.Shape, { strokeWidth: 4, stroke: '#00a4a4' })
     ); // the link shape
 
     model.nodeDataArray = [
