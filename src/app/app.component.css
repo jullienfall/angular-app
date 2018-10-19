@@ -7,11 +7,15 @@
   color: #fff;
 }
 
+.navbar-nav {
+  flex-wrap: wrap;
+}
+
 .navbar .nav-link {
   color: #fff;
   transition: 0.3s;
   font-size: 19px;
-  padding: 0 25px;
+  padding: 0 20px;
 }
 
 .navbar .navbar-brand {

@@ -1,36 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // components
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { ErrorComponent } from './error/error.component';
+import { FooterComponent } from './components/footer';
+import { BlogModule } from './components/blog';
+import { ContactModule } from './components/contact';
+import { ChartsModule } from './components/chart';
+import { ProductsModule } from './components/products';
+import { DatepickerModule } from './components/datepicker';
+import { SliderModule } from './components/slider';
+import { SwipersModule } from './components/swiper';
+import { ModalModule } from './components/modal';
+import { NgrxModule } from './components/ngrx';
+import { UserModule } from './login-in';
+// import { GojsModule } from './gojs';
+import { GojsModule } from 'demolib-gojs';
 
-// modules
-import { BlogModule } from './blog/blog.module';
-import { ContactModule } from './contact/contact.module';
-import { ChartsModule } from './chart/chart.module';
-import { ProductsModule } from './products/products.module';
-import { DatepickerModule } from './datepicker/datepicker.module';
-import { SliderModule } from './slider/slider.module';
-import { SwipersModule } from './swiper/swiper.module';
-import { ModalModule } from './modal/modal.module';
-import { NgrxModule } from './ngrx/ngrx.module';
-import { UserModule } from './login-in/user.module';
-import { GojsModule } from './gojs/gojs.module';
+// routing
+import { AppRoutingModule } from './app-routing.module';
+
+// error handler
+import { ErrorHandlerService, ErrorModule } from './shared/error';
 
 // in-memory-data.service
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
-
-// services
-import { ErrorHandlerService } from './error-handler.service';
+import { InMemoryDataService } from './shared/in-memory-data/in-memory-data.service';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, ErrorComponent],
+  declarations: [AppComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -47,6 +47,7 @@ import { ErrorHandlerService } from './error-handler.service';
     NgrxModule,
     UserModule,
     GojsModule,
+    ErrorModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   bootstrap: [AppComponent],
