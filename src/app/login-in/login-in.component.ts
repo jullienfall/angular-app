@@ -57,7 +57,7 @@ export class LoginInComponent implements OnInit, OnDestroy {
     if (this.authService.redirectUrl) {
       this.router.navigateByUrl(this.authService.redirectUrl);
     } else {
-      this.router.navigate(['/blog']);
+      this.router.navigate(['/home']);
     }
   }
 }

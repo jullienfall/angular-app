@@ -1,9 +1,5 @@
 .container {
   text-align: center;
-  min-height: 80vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .btn-start {

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from './blog.service';
 import { Data } from './data';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
@@ -10,11 +8,20 @@ import { Observable } from 'rxjs';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
-  subscription;
-  data: Observable<Data[]>;
+  title: string = 'Blog';
+  private subscription;
+  data: Data[];
+  showBlog: boolean = false;
   constructor(private blogService: BlogService) {}
 
   ngOnInit() {
-    this.data = this.blogService.getData().pipe(map(value => value));
+    this.subscription = this.blogService
+      .getData()
+      .subscribe(data => (this.data = data))
+      .add(() => (this.showBlog = true));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

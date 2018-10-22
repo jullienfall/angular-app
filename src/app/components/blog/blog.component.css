@@ -5,3 +5,7 @@ pagination-controls {
 .card {
   margin: 20px 0;
 }
+
+h1 {
+  color: rgba(54, 112, 112, 0.925);
+}

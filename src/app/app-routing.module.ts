@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BlogComponent } from './components/blog';
+// component
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: 'blog', component: BlogComponent },
-  { path: '', redirectTo: '/blog', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

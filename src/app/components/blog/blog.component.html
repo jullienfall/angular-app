@@ -1,11 +1,15 @@
-<div class="container">
-  <div class="card"
-       *ngFor='let item of data | async | paginate: { itemsPerPage: 3, currentPage: p }'>
-    <div class="card-body">
-      <h4><span>{{ item.id }}. </span>{{ item.title }}</h4>
-      <p>{{ item.body }}</p>
+<div *ngIf="showBlog"
+     class="container">
+  <div>
+    <h1>{{ title }}</h1>
+    <div class="card"
+         *ngFor='let item of data | paginate: { itemsPerPage: 3, currentPage: p }'>
+      <div class="card-body">
+        <h4><span>{{ item.id }}. </span>{{ item.title }}</h4>
+        <p>{{ item.body }}</p>
+      </div>
     </div>
+    <pagination-controls (pageChange)="p = $event"
+                         directionLinks="false"></pagination-controls>
   </div>
-  <pagination-controls (pageChange)="p = $event"
-                       directionLinks="false"></pagination-controls>
 </div>

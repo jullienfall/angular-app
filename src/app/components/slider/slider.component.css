@@ -1,8 +1,14 @@
 #carouselExampleIndicators {
-  padding: 80px 0;
   text-align: center;
   color: #fff;
-  background-color: rgba(60, 63, 63, 0.3);
+}
+
+.slider-conainer {
+  background: rgba(78, 78, 74, 0.4);
+}
+
+.carousel-indicators {
+  bottom: -42px;
 }
 
 .carousel-indicators li {

@@ -1,33 +1,56 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval=0>
-  <h1>Videos</h1>
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner center">
-    <div class="carousel-item active" [ngClass]="{'active': i === 0}" *ngFor="let slide of slides; let i = index">
-      <div class="row">
-        <div class="col-md-4">
-          <vg-player>
-            <vg-overlay-play></vg-overlay-play>
-            <video #mediaOne [vgMedia]="mediaOne" id="playerOne" preload="auto" src="{{ slide.video1 }}">
-            </video>
-          </vg-player>
-        </div>
-        <div class="col-md-4">
-          <vg-player>
-            <vg-overlay-play></vg-overlay-play>
-            <video #mediaTwo [vgMedia]="mediaTwo" id="playerTwo" preload="auto" src="{{ slide.video2 }}">
-            </video>
-          </vg-player>
-        </div>
-        <div class="col-md-4">
-          <vg-player>
-            <vg-overlay-play></vg-overlay-play>
-            <video #mediaThree [vgMedia]="mediaThree" id="playerThree" preload="auto" src="{{ slide.video3 }}">
-            </video>
-          </vg-player>
+<div class="slider-conainer container-fluid justify-content-center">
+  <div id="carouselExampleIndicators"
+       class="carousel slide"
+       data-ride="carousel"
+       data-interval=0>
+    <h1>Videos</h1>
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators"
+          data-slide-to="0"
+          class="active"></li>
+      <li data-target="#carouselExampleIndicators"
+          data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators"
+          data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner center">
+      <div class="carousel-item active"
+           [ngClass]="{'active': i === 0}"
+           *ngFor="let slide of slides; let i = index">
+        <div class="row">
+          <div class="col-md-4">
+            <vg-player>
+              <vg-overlay-play></vg-overlay-play>
+              <video #mediaOne
+                     [vgMedia]="mediaOne"
+                     id="playerOne"
+                     preload="auto"
+                     src="{{ slide.video1 }}">
+              </video>
+            </vg-player>
+          </div>
+          <div class="col-md-4">
+            <vg-player>
+              <vg-overlay-play></vg-overlay-play>
+              <video #mediaTwo
+                     [vgMedia]="mediaTwo"
+                     id="playerTwo"
+                     preload="auto"
+                     src="{{ slide.video2 }}">
+              </video>
+            </vg-player>
+          </div>
+          <div class="col-md-4">
+            <vg-player>
+              <vg-overlay-play></vg-overlay-play>
+              <video #mediaThree
+                     [vgMedia]="mediaThree"
+                     id="playerThree"
+                     preload="auto"
+                     src="{{ slide.video3 }}">
+              </video>
+            </vg-player>
+          </div>
         </div>
       </div>
     </div>

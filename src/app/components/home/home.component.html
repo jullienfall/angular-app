@@ -1,0 +1,8 @@
+<div class="container-fluid home-container">
+  <div class="home-container-inner">
+    <h1>{{ title }}</h1>
+    <button *ngIf='!isLoggedIn'
+            class="btn btn-info"
+            routerLink='/login'>{{ logBtn | uppercase}}</button>
+  </div>
+</div>

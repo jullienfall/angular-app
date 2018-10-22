@@ -5,6 +5,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // components
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { FooterComponent } from './components/footer';
 import { BlogModule } from './components/blog';
 import { ContactModule } from './components/contact';
@@ -30,7 +32,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './shared/in-memory-data/in-memory-data.service';
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent],
+  declarations: [AppComponent, FooterComponent, HomeComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
