@@ -15,26 +15,30 @@
   <div class="collapse navbar-collapse"
        id="navbarNav">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/blog'>Blog</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/contact'>Contact</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/chart'>Chart</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/products'>Products</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown"
+          routerLinkActive="active">
         <a class="nav-link dropdown-toggle"
            data-toggle="dropdown"
-           href="#"
            role="button"
            aria-haspopup="true"
            aria-expanded="false">Carousel</a>
@@ -47,15 +51,18 @@
              routerLink='/carousel/modal'>Modal</a>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/datepicker'>Datepicker</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/ngrx'>Ngrx</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item"
+          routerLinkActive="active">
         <a class="nav-link"
            routerLink='/gojs'>GoJS</a>
       </li>
@@ -80,3 +87,5 @@
     </ul>
   </div>
 </nav>
+
+<router-outlet></router-outlet>
