@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // videogular
 import { VgCoreModule } from 'videogular2/core';
@@ -12,19 +11,7 @@ import { VgBufferingModule } from 'videogular2/buffering';
 import { SliderComponent } from './slider.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
-    RouterModule.forChild([
-      {
-        path: 'slider',
-        component: SliderComponent
-      }
-    ])
-  ],
+  imports: [CommonModule, VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule],
   declarations: [SliderComponent]
 })
 export class SliderModule {}

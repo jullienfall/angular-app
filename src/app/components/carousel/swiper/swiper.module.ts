@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 // swiper
 import { SwiperModule } from 'ngx-swiper-wrapper';
@@ -20,11 +19,7 @@ const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
 };
 
 @NgModule({
-  imports: [
-    CommonModule,
-    SwiperModule,
-    RouterModule.forChild([{ path: 'swiper', component: SwiperComponent }])
-  ],
+  imports: [CommonModule, SwiperModule],
   declarations: [SwiperComponent],
   providers: [
     {

@@ -13,9 +13,7 @@ import { ContactModule } from './components/contact';
 import { ChartsModule } from './components/chart';
 import { ProductsModule } from './components/products';
 import { DatepickerModule } from './components/datepicker';
-import { SliderModule } from './components/slider';
-import { SwipersModule } from './components/swiper';
-import { ModalModule } from './components/modal';
+import { CarouselModule } from './components/carousel/carousel.module';
 import { NgrxModule } from './components/ngrx';
 import { UserModule } from './login-in';
 // import { GojsModule } from './gojs';
@@ -43,9 +41,7 @@ import { InMemoryDataService } from './shared/in-memory-data/in-memory-data.serv
     BlogModule,
     ProductsModule,
     DatepickerModule,
-    SliderModule,
-    SwipersModule,
-    ModalModule,
+    CarouselModule,
     NgrxModule,
     UserModule,
     GojsModule,
